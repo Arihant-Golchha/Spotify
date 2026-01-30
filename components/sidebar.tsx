@@ -1,13 +1,7 @@
 "use client"
 
 import { useState } from "react"
-
-const PLAYLISTS = [
-  "Liked Songs",
-  "Chill Vibes",
-  "Workout Mix",
-  "Late Night Coding",
-]
+import { PLAYLISTS } from "@/src/data/music"
 
 export default function Sidebar() {
   const [activePlaylist, setActivePlaylist] = useState<string | null>(null)
@@ -19,13 +13,13 @@ export default function Sidebar() {
       </h2>
 
       <ul className="space-y-2">
-        {PLAYLISTS.map((name) => {
-          const isActive = activePlaylist === name
+        {PLAYLISTS.map((playlist) => {
+          const isActive = activePlaylist === playlist.id
 
           return (
             <li
-              key={name}
-              onClick={() => setActivePlaylist(name)}
+              key={playlist.id}
+              onClick={() => setActivePlaylist(playlist.id)}
               className={`group flex items-center gap-2 px-2 py-1 rounded cursor-pointer transition
                 ${
                   isActive
@@ -48,7 +42,7 @@ export default function Sidebar() {
               </span>
 
               {/* Name */}
-              <span className="truncate">{name}</span>
+              <span className="truncate">{playlist.playlist_name}</span>
             </li>
           )
         })}
